@@ -1,4 +1,4 @@
-from datetime import date as dt
+from datetime import date
 
 
 def calculate_birthday_countdown(birthday):
@@ -7,15 +7,21 @@ def calculate_birthday_countdown(birthday):
 
     Если день рождения сегодня, то возвращает 0.
     """
-    today = dt.today()
+    # Сохраняем текущую дату в переменную today.
+    today = date.today()
+    # Получаем день рождения в этом году
+    # с помощью вспомогательной функции get_birthday_for_year.
     this_year_birthday = get_birthday_for_year(birthday, today.year)
 
+    # Если день рождения уже прошел...
     if this_year_birthday < today:
+        # ...то следующий ДР будет в следующем году.
         next_birthday = get_birthday_for_year(birthday, today.year + 1)
     else:
+        # А если в этом году еще не было ДР, то он и будет следующим.
         next_birthday = this_year_birthday
-    next_birthday = this_year_birthday
 
+    # Считаем разницу между следующим днем рождения и сегодняшним днем в днях.
     birthday_countdown = (next_birthday - today).days
     return birthday_countdown
 
@@ -36,4 +42,4 @@ def get_birthday_for_year(birthday, year):
     except ValueError:
         # В этом случае устанавливаем ДР 1 марта.
         calculated_birthday = date(year=year, month=3, day=1)
-    return calculated_birthday 
+    return calculated_birthday
