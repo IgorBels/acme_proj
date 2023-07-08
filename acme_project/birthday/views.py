@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
+    DetailView,
+    ListView,
     UpdateView
 )
 
@@ -53,9 +55,20 @@ class BirthdayCreateView(BirthdayMixin, BirthdayFormMixin, CreateView):
     pass
 
 
+class BirthdayListView(ListView):
+    model = Birthday
+    ordering = 'id'
+    paginate_by = 10 
+
+
+
 class BirthdayUpdateView(BirthdayMixin, BirthdayFormMixin, UpdateView):
     pass
 
 
 class BirthdayDeleteView(BirthdayMixin, DeleteView):
     pass
+
+class BirthdayDetailView(DetailView):
+    model = Birthday
+
